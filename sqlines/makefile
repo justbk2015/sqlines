@@ -1,10 +1,11 @@
 SRCS += $(wildcard ./*.cpp)
+CXXFLAG = -g -O2 -ggdb 
 TARGET = sqlines
 SUB_TARGET = ../sqlparser/sqlparser.a
 SRCS += $(SUB_TARGET)
 subdir = ../sqlparser/
 $(TARGET) : $(SRCS)
-	g++ -o $(TARGET) $^  -fpermissive
+	g++ $(CXXFLAG) -o $(TARGET) $^  -fpermissive
 $(SUB_TARGET):
 	make -C ../sqlparser 
 
