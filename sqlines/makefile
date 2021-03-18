@@ -1,2 +1,14 @@
-sqlines:
-	g++ applog.cpp file.cpp filelist.cpp main.cpp os.cpp parameters.cpp sqlines.cpp str.cpp ../sqlparser/sqlparser.a -o sqlines
+SRCS += $(wildcard ./*.cpp)
+TARGET = sqlines
+SUB_TARGET = ../sqlparser/sqlparser.a
+SRCS += $(SUB_TARGET)
+subdir = ../sqlparser/
+$(TARGET) : $(SRCS)
+	g++ -o $(TARGET) $^  -fpermissive
+$(SUB_TARGET):
+	make -C ../sqlparser 
+
+.PHONY = clean
+clean :
+	rm -rf *.o $(TARGET) $(TARGET).log
+	make -C ../sqlparser clean
